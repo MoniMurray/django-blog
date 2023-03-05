@@ -3,6 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Post
 from .forms import CommentForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -53,6 +54,7 @@ class PostDetail(View):
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.save()
+            messages.success(request, 'Thank you for your comment.')
         else:
             comment_form = CommentForm()
         
